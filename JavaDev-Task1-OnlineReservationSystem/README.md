@@ -57,22 +57,48 @@ Online Reservation System
 │
 └── Database Layer
     └── JDBC → MySQL
-UI Layer
+```
+
+### UI Layer
+
+```text
 LoginFrame
 MainFrame
 ReservationPanel
 CancellationPanel
-DAO Layer
+```
+
+### DAO Layer
+
+```text
 UserDAO
 TrainDAO
 ReservationDAO
-Model Layer
+```
+
+### Model Layer
+
+```text
 Reservation
-Service Layer
+```
+
+### Service Layer
+
+```text
 PNRGenerator
-Database Layer
+```
+
+### Database Layer
+
+```text
 DBConnection
-📂 Project Structure
+```
+
+---
+
+## 📂 Project Structure
+
+```text
 JavaDev-Task1-OnlineReservationSystem
 │
 ├── database
@@ -127,7 +153,13 @@ JavaDev-Task1-OnlineReservationSystem
 ├── pom.xml
 ├── README.md
 └── .gitignore
-🔄 Application Workflow
+```
+
+---
+
+## 🔄 Application Workflow
+
+```text
 Create Account
       ↓
     Login
@@ -151,307 +183,361 @@ Cancel Reservation
 Cancellation Confirmation
       ↓
     Logout
-🗄️ Database
+```
 
-The application uses MySQL to store users, trains, and reservation information.
+---
 
-Database Name
+## 🗄️ Database
+
+The application uses **MySQL** to store users, trains, and reservation information.
+
+### Database Name
+
+```text
 reservation_system
-Tables
+```
+
+### Tables
+
+```text
 users
 trains
 reservations
-Database Relationship
+```
+
+### Database Relationship
+
+```text
 trains
    │
    │ train_number
    ▼
 reservations
+```
 
-The train_number in the reservations table references the train_number in the trains table using a foreign key.
+The `train_number` in the `reservations` table references the `train_number` in the `trains` table using a foreign key.
 
-📋 Database Schema
-Users Table
+---
+
+## 📋 Database Schema
+
+### Users Table
 
 Stores user login information.
 
-Column	Description
-id	Unique user ID
-username	User login name
-password	User password
-Trains Table
+| Column | Description |
+|--------|-------------|
+| `id` | Unique user ID |
+| `username` | User login name |
+| `password` | User password |
+
+### Trains Table
 
 Stores available train information.
 
-Column	Description
-train_number	Unique train number
-train_name	Name of the train
-Reservations Table
+| Column | Description |
+|--------|-------------|
+| `train_number` | Unique train number |
+| `train_name` | Name of the train |
+
+### Reservations Table
 
 Stores passenger reservation information.
 
-Column	Description
-pnr	Unique reservation PNR
-passenger_name	Passenger name
-train_number	Selected train
-class_type	Travel class
-journey_date	Date of journey
-source_station	Starting station
-destination_station	Destination station
-created_at	Reservation creation timestamp
-🔌 JDBC Configuration
+| Column | Description |
+|--------|-------------|
+| `pnr` | Unique reservation PNR |
+| `passenger_name` | Passenger name |
+| `train_number` | Selected train |
+| `class_type` | Travel class |
+| `journey_date` | Date of journey |
+| `source_station` | Starting station |
+| `destination_station` | Destination station |
+| `created_at` | Reservation creation timestamp |
 
-The application connects Java to MySQL using JDBC.
+---
+
+## 🔌 JDBC Configuration
+
+The application connects Java to MySQL using **JDBC**.
 
 The actual database configuration file is:
 
+```text
 src/main/resources/config.properties
+```
 
 This file is intentionally excluded from Git because it contains the local MySQL password.
 
 A safe example configuration is provided:
 
+```text
 src/main/resources/config.example.properties
+```
 
-Example:
+### Example
 
+```properties
 db.url=jdbc:mysql://localhost:3306/reservation_system
 db.username=root
 db.password=YOUR_MYSQL_PASSWORD
+```
 
-Replace YOUR_MYSQL_PASSWORD with your own local MySQL password.
+Replace `YOUR_MYSQL_PASSWORD` with your own local MySQL password.
 
-▶️ How to Run
-1. Clone the Repository
+---
+
+## ▶️ How to Run
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/shital2904/OIBSIP.git
-2. Open the Project
+```
 
-Open the following folder in IntelliJ IDEA:
+### 2. Open the Project
 
+Open the following folder in **IntelliJ IDEA**:
+
+```text
 JavaDev-Task1-OnlineReservationSystem
+```
 
-Make sure IntelliJ recognizes it as a Maven project.
+Make sure IntelliJ recognizes it as a **Maven project**.
 
-3. Configure MySQL
+### 3. Configure MySQL
 
 Start your MySQL server.
 
 Open:
 
+```text
 database/schema.sql
+```
 
-Run the SQL script in MySQL Workbench.
+Run the SQL script in **MySQL Workbench**.
 
 This creates the required:
 
-Database
-Users table
-Trains table
-Reservations table
-Sample train data
-4. Configure Database Credentials
+- Database
+- Users table
+- Trains table
+- Reservations table
+- Sample train data
+
+### 4. Configure Database Credentials
 
 Create:
 
+```text
 src/main/resources/config.properties
+```
 
 Add:
 
+```properties
 db.url=jdbc:mysql://localhost:3306/reservation_system
 db.username=root
 db.password=YOUR_MYSQL_PASSWORD
+```
 
 Use your own MySQL password.
 
-5. Run the Application
+### 5. Run the Application
 
 Open:
 
+```text
 src/main/java/com/shital/reservation/Main.java
+```
 
-Run Main.java.
+Run `Main.java`.
 
 The Java Swing login screen will appear.
 
-🔑 Demo Login
+---
+
+## 🔑 Demo Login
 
 For the internship demonstration, the database contains:
 
+```text
 Username: admin
 Password: admin123
+```
 
 This is intended only for educational/demo purposes.
 
-🧪 Important SQL Commands
-Create Database
+---
+
+## 🧪 Important SQL Commands
+
+### Create Database
+
+```sql
 CREATE DATABASE IF NOT EXISTS reservation_system;
-Select Database
+```
+
+### Select Database
+
+```sql
 USE reservation_system;
-Show Tables
+```
+
+### Show Tables
+
+```sql
 SHOW TABLES;
-View Users
+```
+
+### View Users
+
+```sql
 SELECT id, username
 FROM users;
-View Trains
+```
+
+### View Trains
+
+```sql
 SELECT *
 FROM trains;
-View Reservations
+```
+
+### View Reservations
+
+```sql
 SELECT *
 FROM reservations;
-Search Reservation Using PNR
+```
+
+### Search Reservation Using PNR
+
+```sql
 SELECT *
 FROM reservations
 WHERE pnr = 'YOUR_PNR';
-Count Available Trains
+```
+
+### Count Available Trains
+
+```sql
 SELECT COUNT(*) AS total_trains
 FROM trains;
-## 📸 Application Screenshots
-
-### 1. 🔐 Login Screen
-
-The login screen allows registered users to authenticate before accessing the reservation system.
-
-![Login Screen](screenshots/login-screen.png)
+```
 
 ---
 
-### 2. 🆕 Create Account
+## 📸 Application Screenshots
 
-New users can create an account before logging into the reservation system.
+### 01. 🆕 Create Account
 
 ![Create Account](screenshots/create-account.png)
 
----
+### 02. 🔐 Login
 
-### 3. ⚠️ Access Denied
+![Login Screen](screenshots/login-screen.png)
 
-The application displays an access-denied message when invalid login credentials are entered.
+### 03. ⚠️ Access Denied
 
 ![Access Denied](screenshots/access-denied.png)
 
----
-
-### 4. 🎫 Reservation Booking Form
-
-Users can enter passenger details, select the train, choose the class, and provide journey information.
+### 04. 🎫 Reservation Booking Form
 
 ![Reservation Booking Form](screenshots/reservation-booking-form.png)
 
----
+### 05. 🧾 Booking Confirmation & PNR
 
-### 5. 🧾 Booking Confirmation & PNR
+![Booking Confirmation & PNR](screenshots/booking-confirmation-pnr.png)
 
-After successful reservation, the system generates a unique PNR and displays the booking confirmation.
-
-![Booking Confirmation and PNR](screenshots/booking-confirmation-pnr.png)
-
----
-
-### 6. 🔎 Fetched Booking Details
-
-Users can retrieve their reservation information using the generated PNR.
+### 06. 🔎 Fetched Booking Details
 
 ![Fetched Booking Details](screenshots/fetched-booking-details.png)
 
----
-
-### 7. ❌ Cancellation Confirmation
-
-The system asks for confirmation before cancelling an existing reservation.
+### 07. ❌ Cancellation Confirmation
 
 ![Cancellation Confirmation](screenshots/cancellation-confirmation.png)
 
----
-
-### 8. ✅ Cancellation Success
-
-After successful cancellation, the application displays a confirmation message.
+### 08. ✅ Cancellation Success
 
 ![Cancellation Success](screenshots/cancellation-success.png)
 
----
-
-### 9. 🚪 Logout
-
-Users can safely log out of the reservation system.
+### 09. 🚪 Logout
 
 ![Logout](screenshots/logout.png)
-
----
 
 ## 🗄️ MySQL Database Screenshots
 
 ### 10. 📊 Database Tables
 
-Displays the tables created inside the `reservation_system` database.
-
 ![MySQL Database Tables](screenshots/mysql-database-tables.png)
-
----
 
 ### 11. 👤 Users Table
 
-Displays registered users stored in the MySQL database.
-
 ![MySQL Users Table](screenshots/mysql-users-table.png)
-
----
 
 ### 12. 🚆 Trains Table
 
-Displays the available trains and their train numbers.
-
 ![MySQL Trains Table](screenshots/mysql-trains-table.png)
-
----
 
 ### 13. 🎫 Reservations Table
 
-Displays reservation records stored by the Java application.
-
 ![MySQL Reservations Table](screenshots/mysql-reservations-table.png)
 
-🔒 Security
+---
+
+## 🔒 Security
 
 Sensitive database credentials are not committed to the GitHub repository.
 
-The following file is excluded using .gitignore:
+The following file is excluded using `.gitignore`:
 
+```text
 src/main/resources/config.properties
+```
 
 Only the safe example configuration is included:
 
+```text
 src/main/resources/config.example.properties
-Important
+```
+
+### Important
 
 This project is intended for educational and internship purposes.
 
 In a production application:
 
-User passwords should be securely hashed.
-Database credentials should be stored using environment variables or a secure secrets manager.
-Authentication and authorization should use stronger security practices.
-📚 Concepts Demonstrated
+- User passwords should be securely hashed.
+- Database credentials should be stored using environment variables or a secure secrets manager.
+- Authentication and authorization should use stronger security practices.
+
+---
+
+## 📚 Concepts Demonstrated
 
 This project demonstrates practical implementation of:
 
-Object-Oriented Programming
-Java Swing GUI development
-Event handling
-JDBC
-MySQL
-SQL
-CRUD operations
-DAO pattern
-Layered architecture
-Foreign key relationships
-Exception handling
-Input validation
-Database connectivity
-PNR generation
-Maven dependency management
-🎓 Internship
+- Object-Oriented Programming
+- Java Swing GUI development
+- Event handling
+- JDBC
+- MySQL
+- SQL
+- CRUD operations
+- DAO pattern
+- Layered architecture
+- Foreign key relationships
+- Exception handling
+- Input validation
+- Database connectivity
+- PNR generation
+- Maven dependency management
 
-OIBSIP – Java Development Internship
+---
 
-Task 1 – Online Reservation System
+## 🎓 Internship
+
+**OIBSIP – Java Development Internship**
+
+**Task 1 – Online Reservation System**
