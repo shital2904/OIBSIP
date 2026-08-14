@@ -1,178 +1,538 @@
-# 📝 Online Examination System - Java Swing
+# 🚆 Online Reservation System
 
-A desktop-based Online Examination System built using **Java Swing**. The application provides a simple platform for students to create an account, log in, update their profile, select an examination subject, answer multiple-choice questions, and view their final examination results.
+A desktop-based **Online Reservation System** developed using **Java Swing, JDBC, and MySQL** as part of the **OIBSIP Java Development Internship – Task 1**.
 
-## 🚀 Key Features
+The application provides a user-friendly interface for account creation, authentication, train selection, railway reservation, PNR generation, booking retrieval, reservation cancellation, and logout.
 
-- 🔐 Secure user login
-- 🆕 Create a new student account
-- 👤 Update profile information
-- 📚 Subject selection
-- 💻 Java examination
-- 🗄️ DBMS examination
-- 🌳 Data Structures examination
-- ⚙️ Operating Systems examination
-- 🌐 Computer Networks examination
-- ❓ Multiple-choice questions with four options
-- 🔢 25 questions for each subject
-- ⏱️ 30-minute examination timer
-- 📊 Progress bar and answered-question counter
-- ◀️ Previous and ▶️ Next question navigation
-- 📤 Manual examination submission
-- 🤖 Automatic submission when the timer expires
-- 🏆 Final result with score details
-- ⌛ Displays time taken to complete the examination
-- ⚠️ Confirmation before quitting or submitting
-- 🚪 Logout functionality
+---
 
-## 🛠️ Technologies & Tools
+## ✨ Features
 
-| Technology | Purpose |
-|------------|---------|
-| Java | Core application development |
-| Java Swing | Graphical User Interface |
-| AWT | GUI components and event handling |
-| Collections Framework | Managing questions and user data |
-| `javax.swing.Timer` | Examination countdown timer |
-| IntelliJ IDEA | Development environment |
+* 🆕 Create a new user account
+* 🔐 User login and authentication
+* ⚠️ Invalid login / access denied handling
+* 🚆 Train search and selection
+* 🎫 Railway ticket reservation
+* 👤 Passenger information management
+* 🧾 Automatic PNR generation
+* 🔎 Retrieve booking details using PNR
+* ❌ Cancel existing reservations
+* ✅ Booking confirmation
+* ⚠️ Cancellation confirmation
+* 🚪 Logout functionality
+* 🗄️ MySQL database integration
+* 🔗 JDBC connectivity
+* 🔒 Protected database configuration
+
+---
+
+## 🛠️ Technologies Used
+
+| Technology        | Purpose                           |
+| ----------------- | --------------------------------- |
+| **Java**          | Core application development      |
+| **Java Swing**    | Graphical User Interface          |
+| **JDBC**          | Database connectivity             |
+| **MySQL**         | Data storage and management       |
+| **Maven**         | Project and dependency management |
+| **IntelliJ IDEA** | Development environment           |
+
+---
+
+## 🏗️ Project Architecture
+
+The application follows a simple **layered architecture** to separate the user interface, business logic, database operations, and data models.
+
+```text
+Online Reservation System
+│
+├── UI Layer
+│   ├── LoginFrame
+│   ├── MainFrame
+│   ├── ReservationPanel
+│   └── CancellationPanel
+│
+├── DAO Layer
+│   ├── UserDAO
+│   ├── TrainDAO
+│   └── ReservationDAO
+│
+├── Service Layer
+│   └── PNRGenerator
+│
+├── Model Layer
+│   └── Reservation
+│
+└── Database Layer
+    └── DBConnection
+          │
+          ▼
+        MySQL
+```
+
+---
 
 ## 📂 Project Structure
 
 ```text
-JavaDev-Task4-OnlineExaminationSystem
+JavaDev-Task1-OnlineReservationSystem
 │
-├── src
-│   ├── Main.java
-│   ├── ExamApplication.java
-│   ├── Question.java
-│   ├── QuestionBank.java
-│   ├── User.java
-│   └── UserStore.java
+├── database
+│   └── schema.sql
 │
 ├── screenshots
-│   ├── login.png
-│   ├── createaccount.png
-│   ├── Updateprofile.png
-│   ├── selectsubj.png
-│   ├── examination.png
-│   └── result.png
+│   ├── create-account.png
+│   ├── login-screen.png
+│   ├── access-denied.png
+│   ├── reservation-booking-form.png
+│   ├── booking-confirmation-pnr.png
+│   ├── fetched-booking-details.png
+│   ├── cancellation-confirmation.png
+│   ├── cancellation-success.png
+│   ├── logout.png
+│   ├── mysql-database-tables.png
+│   ├── mysql-users-table.png
+│   ├── mysql-trains-table.png
+│   └── mysql-reservations-table.png
 │
+├── src
+│   └── main
+│       ├── java
+│       │   └── com
+│       │       └── shital
+│       │           └── reservation
+│       │               ├── Main.java
+│       │               │
+│       │               ├── dao
+│       │               │   ├── UserDAO.java
+│       │               │   ├── TrainDAO.java
+│       │               │   └── ReservationDAO.java
+│       │               │
+│       │               ├── db
+│       │               │   └── DBConnection.java
+│       │               │
+│       │               ├── model
+│       │               │   └── Reservation.java
+│       │               │
+│       │               ├── service
+│       │               │   └── PNRGenerator.java
+│       │               │
+│       │               └── ui
+│       │                   ├── LoginFrame.java
+│       │                   ├── MainFrame.java
+│       │                   ├── ReservationPanel.java
+│       │                   └── CancellationPanel.java
+│       │
+│       └── resources
+│           └── config.example.properties
+│
+├── pom.xml
 ├── README.md
 └── .gitignore
 ```
 
-## ▶️ How to Run
+---
 
-### Using IntelliJ IDEA
-
-1. Open the project in IntelliJ IDEA.
-2. Configure a compatible Java JDK.
-3. Open `src/Main.java`.
-4. Run the `Main` class.
-5. The application login window will appear.
-
-### Using Command Line
-
-Compile the Java files:
-
-```bash
-javac -d out src/*.java
-```
-
-Run the application:
-
-```bash
-java -cp out Main
-```
-
-## 🔑 Login & Account Creation
-
-Users can either:
-
-- Log in using an existing account.
-- Create a new account using the **Create Account** option.
-
-Example demo credentials:
+## 🔄 Application Workflow
 
 ```text
-Username: student
-Password: 1234
+Create Account
+      ↓
+    Login
+      ↓
+  Main Menu
+      ↓
+Reservation Form
+      ↓
+Enter Passenger Details
+      ↓
+Select Train
+      ↓
+Generate PNR
+      ↓
+Booking Confirmation
+      ↓
+Fetch Booking Details
+      ↓
+Cancel Reservation
+      ↓
+Cancellation Confirmation
+      ↓
+Cancellation Success
+      ↓
+    Logout
 ```
 
-## 📚 Examination Process
+---
 
-The examination follows these steps:
+## 🗄️ Database
+
+The application uses **MySQL** to store user, train, and reservation information.
+
+### Database
 
 ```text
-Login
-  ↓
-Create/Update Profile
-  ↓
-Select Subject
-  ↓
-Start Examination
-  ↓
-Answer Questions
-  ↓
-Submit Examination
-  ↓
-View Result
+reservation_system
 ```
 
-Students can move between questions using the **Next** and **Previous** buttons.
+### Tables
 
-## ⏱️ Examination Timer
+```text
+users
+trains
+reservations
+```
 
-Each examination has a **30-minute countdown timer**.
+### Database Relationship
 
-When the timer reaches zero, the examination is automatically submitted and the result is displayed.
+```text
+trains
+   │
+   │ train_number
+   ▼
+reservations
+```
 
-## 🏆 Result
+The `train_number` in the `reservations` table references the `train_number` in the `trains` table using a **foreign key relationship**.
 
-After submission, the result screen displays information such as:
+---
 
-- Total score
-- Correct answers
-- Incorrect answers
-- Unanswered questions
-- Time taken
+## 📋 Database Schema
 
-## 💾 Data Storage
+### 👤 Users Table
 
-This application does not require an external database.
+Stores registered user login information.
 
-User details and examination questions are maintained **in memory during the application session**.
+| Column     | Description     |
+| ---------- | --------------- |
+| `id`       | Unique user ID  |
+| `username` | User login name |
+| `password` | User password   |
 
-## 📸 Application Screenshots
+### 🚆 Trains Table
 
-### 🔐 Login
+Stores available train information.
 
-![Login Screen](screenshots/login.png)
+| Column         | Description         |
+| -------------- | ------------------- |
+| `train_number` | Unique train number |
+| `train_name`   | Name of the train   |
 
-### 🆕 Create Account
+### 🎫 Reservations Table
 
-![Create Account](screenshots/createaccount.png)
+Stores passenger reservation information.
 
-### 👤 Update Profile
+| Column                | Description                    |
+| --------------------- | ------------------------------ |
+| `pnr`                 | Unique reservation PNR         |
+| `passenger_name`      | Passenger name                 |
+| `train_number`        | Selected train                 |
+| `class_type`          | Travel class                   |
+| `journey_date`        | Date of journey                |
+| `source_station`      | Starting station               |
+| `destination_station` | Destination station            |
+| `created_at`          | Reservation creation timestamp |
 
-![Update Profile](screenshots/Updateprofile.png)
+---
 
-### 📚 Select Subject
+## 🔌 JDBC Configuration
 
-![Select Subject](screenshots/selectsubj.png)
+The application connects Java to MySQL using **JDBC**.
 
-### 📝 Examination
+Create the following file:
 
-![Examination Screen](screenshots/examination.png)
+```text
+src/main/resources/config.properties
+```
 
-### 🏆 Result
+Add your local MySQL configuration:
 
-![Result Screen](screenshots/result.png)
+```properties
+db.url=jdbc:mysql://localhost:3306/reservation_system
+db.username=root
+db.password=YOUR_MYSQL_PASSWORD
+```
 
+Replace `YOUR_MYSQL_PASSWORD` with your own MySQL password.
+
+For security, `config.properties` is excluded from GitHub.
+
+A safe example file is provided:
+
+```text
+src/main/resources/config.example.properties
+```
+
+---
+
+# ▶️ How to Run
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/shital2904/OIBSIP.git
+```
+
+## 2. Open the Project
+
+Open the following folder in **IntelliJ IDEA**:
+
+```text
+JavaDev-Task1-OnlineReservationSystem
+```
+
+Make sure IntelliJ recognizes the project as a **Maven project**.
+
+## 3. Configure MySQL
+
+Start your MySQL server.
+
+Open:
+
+```text
+database/schema.sql
+```
+
+Run the SQL script in **MySQL Workbench**.
+
+This creates:
+
+* Database
+* Users table
+* Trains table
+* Reservations table
+* Sample train data
+
+## 4. Configure Database Credentials
+
+Create:
+
+```text
+src/main/resources/config.properties
+```
+
+Add:
+
+```properties
+db.url=jdbc:mysql://localhost:3306/reservation_system
+db.username=root
+db.password=YOUR_MYSQL_PASSWORD
+```
+
+## 5. Run the Application
+
+Open:
+
+```text
+src/main/java/com/shital/reservation/Main.java
+```
+
+Run `Main.java`.
+
+The Java Swing login screen will appear.
+
+---
+
+## 🔑 Demo Login
+
+For internship demonstration:
+
+```text
+Username: admin
+Password: admin123
+```
+
+> These credentials are intended only for educational and demonstration purposes.
+
+---
+
+# 📸 Application Screenshots
+
+The screenshots below are arranged according to the **actual application workflow**.
+
+---
+
+## 01. 🆕 Create Account
+
+![Create Account](./screenshots/create-account.png)
+
+---
+
+## 02. 🔐 Login
+
+![Login Screen](./screenshots/login-screen.png)
+
+---
+
+## 03. ⚠️ Access Denied
+
+![Access Denied](./screenshots/access-denied.png)
+
+---
+
+## 04. 🎫 Reservation Booking Form
+
+![Reservation Booking Form](./screenshots/reservation-booking-form.png)
+
+---
+
+## 05. 🧾 Booking Confirmation & PNR
+
+![Booking Confirmation & PNR](./screenshots/booking-confirmation-pnr.png)
+
+---
+
+## 06. 🔎 Fetched Booking Details
+
+![Fetched Booking Details](./screenshots/fetched-booking-details.png)
+
+---
+
+## 07. ⚠️ Cancellation Confirmation
+
+![Cancellation Confirmation](./screenshots/cancellation-confirmation.png)
+
+---
+
+## 08. ✅ Cancellation Success
+
+![Cancellation Success](./screenshots/cancellation-success.png)
+
+---
+
+## 09. 🚪 Logout
+
+![Logout](./screenshots/logout.png)
+
+---
+
+## 10. 📊 Database Tables
+
+![MySQL Database Tables](./screenshots/mysql-database-tables.png)
+
+---
+
+## 11. 👤 Users Table
+
+![MySQL Users Table](./screenshots/mysql-users-table.png)
+
+---
+
+## 12. 🚆 Trains Table
+
+![MySQL Trains Table](./screenshots/mysql-trains-table.png)
+
+---
+
+## 13. 🎫 Reservations Table
+
+![MySQL Reservations Table](./screenshots/mysql-reservations-table.png)
+## 🔎 Useful SQL Commands
+
+### Create Database
+
+```sql
+CREATE DATABASE IF NOT EXISTS reservation_system;
+```
+
+### Select Database
+
+```sql
+USE reservation_system;
+```
+
+### Show Tables
+
+```sql
+SHOW TABLES;
+```
+
+### View Users
+
+```sql
+SELECT id, username
+FROM users;
+```
+
+### View Trains
+
+```sql
+SELECT *
+FROM trains;
+```
+
+### View Reservations
+
+```sql
+SELECT *
+FROM reservations;
+```
+
+### Search Reservation Using PNR
+
+```sql
+SELECT *
+FROM reservations
+WHERE pnr = 'YOUR_PNR';
+```
+
+### Count Available Trains
+
+```sql
+SELECT COUNT(*) AS total_trains
+FROM trains;
+```
+
+---
+
+## 🔒 Security
+
+Sensitive database credentials are not committed to the GitHub repository.
+
+The following file is excluded using `.gitignore`:
+
+```text
+src/main/resources/config.properties
+```
+
+Only the safe example configuration is included:
+
+```text
+src/main/resources/config.example.properties
+```
+
+For a production application:
+
+* User passwords should be securely hashed.
+* Database credentials should be stored using environment variables or a secure secrets manager.
+* Authentication and authorization should follow stronger security practices.
+
+---
+
+## 📚 Concepts Demonstrated
+
+This project demonstrates practical implementation of:
+
+* Object-Oriented Programming
+* Java Swing GUI development
+* Event handling
+* JDBC
+* MySQL
+* SQL
+* CRUD operations
+* DAO pattern
+* Layered architecture
+* Foreign key relationships
+* Exception handling
+* Input validation
+* Database connectivity
+* PNR generation
+* Maven dependency management
+
+---
 
 ## 🎓 Internship
 
-**OIBSIP - Java Development Internship**
+**OIBSIP – Java Development Internship**
 
-**Task 4 - Online Examination System**
-
+**Task 1 – Online Reservation System**
