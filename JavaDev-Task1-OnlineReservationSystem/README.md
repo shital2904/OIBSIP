@@ -219,44 +219,6 @@ The `train_number` in the `reservations` table references the `train_number` in 
 
 ---
 
-## 📋 Database Schema
-
-### Users Table
-
-Stores user login information.
-
-| Column | Description |
-|--------|-------------|
-| `id` | Unique user ID |
-| `username` | User login name |
-| `password` | User password |
-
-### Trains Table
-
-Stores available train information.
-
-| Column | Description |
-|--------|-------------|
-| `train_number` | Unique train number |
-| `train_name` | Name of the train |
-
-### Reservations Table
-
-Stores passenger reservation information.
-
-| Column | Description |
-|--------|-------------|
-| `pnr` | Unique reservation PNR |
-| `passenger_name` | Passenger name |
-| `train_number` | Selected train |
-| `class_type` | Travel class |
-| `journey_date` | Date of journey |
-| `source_station` | Starting station |
-| `destination_station` | Destination station |
-| `created_at` | Reservation creation timestamp |
-
----
-
 ## 🔌 JDBC Configuration
 
 The application connects Java to MySQL using **JDBC**.
@@ -370,63 +332,6 @@ This is intended only for educational/demo purposes.
 
 ---
 
-## 🧪 Important SQL Commands
-
-### Create Database
-
-```sql
-CREATE DATABASE IF NOT EXISTS reservation_system;
-```
-
-### Select Database
-
-```sql
-USE reservation_system;
-```
-
-### Show Tables
-
-```sql
-SHOW TABLES;
-```
-
-### View Users
-
-```sql
-SELECT id, username
-FROM users;
-```
-
-### View Trains
-
-```sql
-SELECT *
-FROM trains;
-```
-
-### View Reservations
-
-```sql
-SELECT *
-FROM reservations;
-```
-
-### Search Reservation Using PNR
-
-```sql
-SELECT *
-FROM reservations
-WHERE pnr = 'YOUR_PNR';
-```
-
-### Count Available Trains
-
-```sql
-SELECT COUNT(*) AS total_trains
-FROM trains;
-```
-
----
 
 ## 📸 Application Screenshots
 
@@ -438,49 +343,37 @@ FROM trains;
 
 ![Login Screen](screenshots/login-screen.png)
 
-### 03. ⚠️ Access Denied
-
-![Access Denied](screenshots/access-denied.png)
-
-### 04. 🎫 Reservation Booking Form
+### 03. 🎫 Reservation Booking Form
 
 ![Reservation Booking Form](screenshots/reservation-booking-form.png)
 
-### 05. 🧾 Booking Confirmation & PNR
+### 04. 🧾 Booking Confirmation & PNR
 
 ![Booking Confirmation & PNR](screenshots/booking-confirmation-pnr.png)
 
-### 06. 🔎 Fetched Booking Details
+### 05. 🔎 Fetched Booking Details
 
 ![Fetched Booking Details](screenshots/fetched-booking-details.png)
 
-### 07. ❌ Cancellation Confirmation
+### 06. ❌ Cancellation Confirmation
 
 ![Cancellation Confirmation](screenshots/cancellation-confirmation.png)
 
-### 08. ✅ Cancellation Success
+### 07. ✅ Cancellation Success
 
 ![Cancellation Success](screenshots/cancellation-success.png)
 
-### 09. 🚪 Logout
-
-![Logout](screenshots/logout.png)
-
 ## 🗄️ MySQL Database Screenshots
 
-### 10. 📊 Database Tables
+### 8. 📊 Database Tables
 
 ![MySQL Database Tables](screenshots/mysql-database-tables.png)
 
-### 11. 👤 Users Table
-
-![MySQL Users Table](screenshots/mysql-users-table.png)
-
-### 12. 🚆 Trains Table
+### 9. 🚆 Trains Table
 
 ![MySQL Trains Table](screenshots/mysql-trains-table.png)
 
-### 13. 🎫 Reservations Table
+### 10. 🎫 Reservations Table
 
 ![MySQL Reservations Table](screenshots/mysql-reservations-table.png)
 
@@ -511,28 +404,6 @@ In a production application:
 - User passwords should be securely hashed.
 - Database credentials should be stored using environment variables or a secure secrets manager.
 - Authentication and authorization should use stronger security practices.
-
----
-
-## 📚 Concepts Demonstrated
-
-This project demonstrates practical implementation of:
-
-- Object-Oriented Programming
-- Java Swing GUI development
-- Event handling
-- JDBC
-- MySQL
-- SQL
-- CRUD operations
-- DAO pattern
-- Layered architecture
-- Foreign key relationships
-- Exception handling
-- Input validation
-- Database connectivity
-- PNR generation
-- Maven dependency management
 
 ---
 
